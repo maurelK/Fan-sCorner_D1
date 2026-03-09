@@ -102,14 +102,14 @@ export default function FanDashboard() {
 
     if (loading) {
         return (
-            <div className="bg-[#faf8f5] min-h-screen py-12 flex items-center justify-center">
+            <div className="bg-[#fffafa] min-h-screen py-12 flex items-center justify-center">
                 <div className="text-[#2d1b4e]">Chargement...</div>
             </div>
         );
     }
 
     return (
-        <div className="bg-[#faf8f5] min-h-screen py-12">
+        <div className="bg-[#fffafa] min-h-screen py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
                     <h1 className="text-4xl md:text-5xl font-bold text-[#2d1b4e]">
@@ -123,16 +123,16 @@ export default function FanDashboard() {
                     </button>
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-lg border border-orange-100 p-8">
+                <div className="bg-white rounded-2xl shadow-lg border border-red-100 p-8">
                     {subscriptions.length === 0 ? (
                         <div className="text-center py-12">
-                            <User size={64} className="mx-auto text-[#ff6b35]/40 mb-4" />
+                            <User size={64} className="mx-auto text-[#ef4444]/40 mb-4" />
                             <p className="text-xl text-[#2d1b4e]/60 mb-8">
                                 Vous n'êtes abonné à aucun créateur pour le moment.
                             </p>
                             <Link
                                 href="/explore"
-                                className="bg-[#ff6b35] text-white px-8 py-3 rounded-full hover:bg-[#e55a2b] transition-colors font-semibold"
+                                className="bg-[#ef4444] text-white px-8 py-3 rounded-full hover:bg-[#dc2626] transition-colors font-semibold"
                             >
                                 Explorer les créateurs
                             </Link>
@@ -140,9 +140,9 @@ export default function FanDashboard() {
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {subscriptions.map((sub) => (
-                                <div key={sub.id} className="bg-[#faf8f5] rounded-xl p-6 border border-orange-200 hover:shadow-md transition-shadow">
+                                <div key={sub.id} className="bg-[#fffafa] rounded-xl p-6 border border-red-200 hover:shadow-md transition-shadow">
                                     <div className="flex items-center gap-4 mb-4">
-                                        <div className="w-16 h-16 rounded-full bg-[#ff6b35] text-white flex items-center justify-center text-xl font-bold shadow-md">
+                                        <div className="w-16 h-16 rounded-full bg-[#ef4444] text-white flex items-center justify-center text-xl font-bold shadow-md">
                                             {getInitials(sub.creator.name)}
                                         </div>
                                         <div>
@@ -202,7 +202,7 @@ export default function FanDashboard() {
                                             type="button"
                                             onClick={() => setCategory(cat)}
                                             className={`py-2 px-3 rounded-lg border text-sm transition-all ${category === cat
-                                                ? 'border-[#ff6b35] bg-orange-50 text-[#ff6b35] font-medium'
+                                                ? 'border-[#ef4444] bg-red-50 text-[#ef4444] font-medium'
                                                 : 'border-gray-200 text-gray-600 hover:border-gray-300'
                                                 }`}
                                         >
@@ -224,7 +224,7 @@ export default function FanDashboard() {
                                     step="100"
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
-                                    className="w-full px-4 py-3 border border-orange-200 rounded-lg focus:ring-2 focus:ring-[#ff6b35] focus:border-transparent text-[#2d1b4e]"
+                                    className="w-full px-4 py-3 border border-red-200 rounded-lg focus:ring-2 focus:ring-[#ef4444] focus:border-transparent text-[#2d1b4e]"
                                 />
                             </div>
 
@@ -236,7 +236,7 @@ export default function FanDashboard() {
                                     onChange={(e) => setBio(e.target.value)}
                                     placeholder="Dites-en plus sur vous..."
                                     rows={3}
-                                    className="w-full px-4 py-3 border border-orange-200 rounded-lg focus:ring-2 focus:ring-[#ff6b35] focus:border-transparent text-[#2d1b4e]"
+                                    className="w-full px-4 py-3 border border-red-200 rounded-lg focus:ring-2 focus:ring-[#ef4444] focus:border-transparent text-[#2d1b4e]"
                                 />
                             </div>
 
@@ -244,14 +244,14 @@ export default function FanDashboard() {
                                 <button
                                     type="button"
                                     onClick={() => setShowCreatorModal(false)}
-                                    className="flex-1 px-6 py-3 border border-orange-200 text-[#2d1b4e] rounded-lg hover:bg-orange-50 transition-colors font-medium"
+                                    className="flex-1 px-6 py-3 border border-red-200 text-[#2d1b4e] rounded-lg hover:bg-red-50 transition-colors font-medium"
                                 >
                                     Annuler
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={upgrading}
-                                    className="flex-1 bg-[#ff6b35] text-white px-6 py-3 rounded-lg hover:bg-[#e55a2b] transition-colors font-medium disabled:opacity-50"
+                                    className="flex-1 bg-[#ef4444] text-white px-6 py-3 rounded-lg hover:bg-[#dc2626] transition-colors font-medium disabled:opacity-50"
                                 >
                                     {upgrading ? '...' : 'Valider'}
                                 </button>

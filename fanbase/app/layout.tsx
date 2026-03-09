@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FANBASE - Vivez de votre passion en Afrique",
+  title: "Fan's Corner - Vivez de votre passion en Afrique",
   description: "La plateforme qui connecte les créateurs africains à leur communauté",
 };
 

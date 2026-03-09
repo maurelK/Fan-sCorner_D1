@@ -56,11 +56,11 @@ export default function ExplorePage() {
 
   const getCoverColor = (index: number) => {
     const colors = [
-      'bg-gradient-to-br from-orange-400 to-pink-500',
+      'bg-gradient-to-br from-red-400 to-pink-500',
       'bg-gradient-to-br from-blue-400 to-purple-500',
       'bg-gradient-to-br from-purple-400 to-indigo-500',
       'bg-gradient-to-br from-green-400 to-teal-500',
-      'bg-gradient-to-br from-yellow-400 to-orange-500',
+      'bg-gradient-to-br from-yellow-400 to-red-500',
       'bg-gradient-to-br from-cyan-400 to-blue-500',
       'bg-gradient-to-br from-pink-400 to-red-500',
       'bg-gradient-to-br from-indigo-400 to-purple-500',
@@ -91,14 +91,14 @@ export default function ExplorePage() {
 
   if (loading) {
     return (
-      <div className="bg-[#faf8f5] min-h-screen py-12 flex items-center justify-center">
+      <div className="bg-[#fffafa] min-h-screen py-12 flex items-center justify-center">
         <div className="text-[#2d1b4e]">Chargement...</div>
       </div>
     );
   }
 
   return (
-    <div className="bg-[#faf8f5] min-h-screen py-12">
+    <div className="bg-[#fffafa] min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl md:text-5xl font-bold text-[#2d1b4e] mb-4">
           Explorer les Créateurs
@@ -114,7 +114,7 @@ export default function ExplorePage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Rechercher un createur..."
-            className="w-full md:max-w-md px-4 py-3 border border-orange-200 rounded-full focus:ring-2 focus:ring-[#ff6b35] focus:border-transparent bg-white text-[#2d1b4e]"
+            className="w-full md:max-w-md px-4 py-3 border border-red-200 rounded-full focus:ring-2 focus:ring-[#ef4444] focus:border-transparent bg-white text-[#2d1b4e]"
           />
         </div>
 
@@ -129,8 +129,8 @@ export default function ExplorePage() {
                 onClick={() => setSelectedCategory(category.id)}
                 className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all ${
                   isActive
-                    ? 'bg-[#ff6b35] text-white shadow-lg'
-                    : 'bg-white text-[#2d1b4e] hover:bg-[#ff6b35]/10 border border-orange-200'
+                    ? 'bg-[#ef4444] text-white shadow-lg'
+                    : 'bg-white text-[#2d1b4e] hover:bg-[#ef4444]/10 border border-red-200'
                 }`}
               >
                 <Icon size={20} />
@@ -155,7 +155,7 @@ export default function ExplorePage() {
               <Link
                 key={creator.id}
                 href={`/creator/${creator.id}`}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-orange-100"
+                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-red-100"
               >
                 <div className={`${creator.cover_image_url ? '' : getCoverColor(index)} h-32 relative`}>
                   {creator.cover_image_url && (
@@ -186,9 +186,9 @@ export default function ExplorePage() {
                 <div className="pt-12 pb-6 px-6 text-center">
                   <h3 className="text-xl font-bold text-[#2d1b4e] mb-2">{creator.name}</h3>
                   <p className="text-sm text-[#2d1b4e]/60 mb-4 line-clamp-2">
-                    {creator.bio || 'Créateur sur FANBASE'}
+                    {creator.bio || "Créateur sur Fan's Corner"}
                   </p>
-                  <div className="flex items-center justify-center gap-2 text-[#ff6b35]">
+                  <div className="flex items-center justify-center gap-2 text-[#ef4444]">
                     <Users size={18} />
                     <span className="font-semibold">{creator.subscribers.toLocaleString()}</span>
                     <span className="text-[#2d1b4e]/60 text-sm">abonnés</span>

@@ -178,21 +178,21 @@ function MessagesContent() {
 
     if (loading) {
         return (
-            <div className="bg-[#faf8f5] min-h-screen py-12 flex items-center justify-center">
+            <div className="bg-[#fffafa] min-h-screen py-12 flex items-center justify-center">
                 <div className="text-[#2d1b4e]">Chargement...</div>
             </div>
         );
     }
 
     return (
-        <div className="bg-[#faf8f5] min-h-screen py-6 sm:py-8">
+        <div className="bg-[#fffafa] min-h-screen py-6 sm:py-8">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-[calc(100dvh-8rem)] sm:h-[calc(100vh-8rem)]">
                 <h1 className="text-3xl font-bold text-[#2d1b4e] mb-6">Messagerie</h1>
 
-                <div className="bg-white rounded-2xl shadow-lg border border-orange-100 flex flex-col md:flex-row h-[calc(100dvh-12rem)] sm:h-[calc(100vh-12rem)] overflow-hidden">
+                <div className="bg-white rounded-2xl shadow-lg border border-red-100 flex flex-col md:flex-row h-[calc(100dvh-12rem)] sm:h-[calc(100vh-12rem)] overflow-hidden">
                     {/* Contacts Sidebar */}
-                    <div className={`${isMobileChatOpen ? 'hidden' : 'flex'} md:flex md:w-1/3 md:border-r border-orange-100 flex-col h-full`}>
-                        <div className="p-4 border-b border-orange-100 bg-orange-50/50">
+                    <div className={`${isMobileChatOpen ? 'hidden' : 'flex'} md:flex md:w-1/3 md:border-r border-red-100 flex-col h-full`}>
+                        <div className="p-4 border-b border-red-100 bg-red-50/50">
                             <h2 className="font-semibold text-[#2d1b4e]">Conversations</h2>
                         </div>
                         <div className="flex-1 overflow-y-auto" style={{ scrollbarGutter: 'stable' }}>
@@ -205,10 +205,10 @@ function MessagesContent() {
                                     <button
                                         key={contact.id}
                                         onClick={() => handleSelectContact(contact)}
-                                        className={`w-full min-h-[64px] box-border p-4 flex items-center gap-3 hover:bg-orange-50 transition-colors text-left ${selectedContact?.id === contact.id ? 'bg-orange-50 border-r-4 border-[#ff6b35]' : ''
+                                        className={`w-full min-h-[64px] box-border p-4 flex items-center gap-3 hover:bg-red-50 transition-colors text-left ${selectedContact?.id === contact.id ? 'bg-red-50 border-r-4 border-[#ef4444]' : ''
                                             }`}
                                     >
-                                        <div className="w-10 h-10 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] font-bold shrink-0">
+                                        <div className="w-10 h-10 rounded-full bg-[#ef4444]/20 flex items-center justify-center text-[#ef4444] font-bold shrink-0">
                                             {contact.name[0].toUpperCase()}
                                         </div>
                                         <div className="flex-1 min-w-0">
@@ -225,7 +225,7 @@ function MessagesContent() {
                                                     {contact.last_message || contact.role}
                                                 </p>
                                                 <span
-                                                    className={`min-w-[24px] text-center bg-[#ff6b35] text-white text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                                                    className={`min-w-[24px] text-center bg-[#ef4444] text-white text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                                                         contact.unread_count && contact.unread_count > 0 ? '' : 'opacity-0'
                                                     }`}
                                                 >
@@ -244,16 +244,16 @@ function MessagesContent() {
                         {selectedContact ? (
                             <>
                                 {/* Header */}
-                                <div className="p-4 border-b border-orange-100 flex items-center gap-3">
+                                <div className="p-4 border-b border-red-100 flex items-center gap-3">
                                     <button
                                         type="button"
                                         onClick={() => setIsMobileChatOpen(false)}
-                                        className="md:hidden w-9 h-9 rounded-full border border-orange-200 flex items-center justify-center text-[#2d1b4e]"
+                                        className="md:hidden w-9 h-9 rounded-full border border-red-200 flex items-center justify-center text-[#2d1b4e]"
                                         aria-label="Retour aux conversations"
                                     >
                                         <ArrowLeft size={18} />
                                     </button>
-                                    <div className="w-10 h-10 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] font-bold">
+                                    <div className="w-10 h-10 rounded-full bg-[#ef4444]/20 flex items-center justify-center text-[#ef4444] font-bold">
                                         {selectedContact.name[0].toUpperCase()}
                                     </div>
                                     <h3 className="font-bold text-[#2d1b4e]">{selectedContact.name}</h3>
@@ -263,7 +263,7 @@ function MessagesContent() {
                                 <div
                                     ref={messagesContainerRef}
                                     onScroll={handleMessagesScroll}
-                                    className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#faf8f5]"
+                                    className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#fffafa]"
                                     style={{ scrollbarGutter: 'stable' }}
                                 >
                                     {sendError && (
@@ -280,8 +280,8 @@ function MessagesContent() {
                                             >
                                                 <div
                                                     className={`max-w-[82%] md:max-w-[70%] rounded-2xl p-3 px-4 md:px-5 shadow-sm ${isMe
-                                                            ? 'bg-[#ff6b35] text-white rounded-br-none'
-                                                            : 'bg-white text-[#2d1b4e] rounded-bl-none border border-orange-100'
+                                                            ? 'bg-[#ef4444] text-white rounded-br-none'
+                                                            : 'bg-white text-[#2d1b4e] rounded-bl-none border border-red-100'
                                                         }`}
                                                 >
                                                     <p>{msg.content}</p>
@@ -296,19 +296,19 @@ function MessagesContent() {
                                 </div>
 
                                 {/* Input */}
-                                <form onSubmit={handleSendMessage} className="p-4 border-t border-orange-100 bg-white">
+                                <form onSubmit={handleSendMessage} className="p-4 border-t border-red-100 bg-white">
                                     <div className="flex gap-2">
                                         <input
                                             type="text"
                                             value={newMessage}
                                             onChange={(e) => setNewMessage(e.target.value)}
                                             placeholder="Écrivez votre message..."
-                                            className="flex-1 px-4 py-3 border border-orange-200 rounded-full focus:ring-2 focus:ring-[#ff6b35] focus:border-transparent text-[#2d1b4e] bg-[#faf8f5]"
+                                            className="flex-1 px-4 py-3 border border-red-200 rounded-full focus:ring-2 focus:ring-[#ef4444] focus:border-transparent text-[#2d1b4e] bg-[#fffafa]"
                                         />
                                         <button
                                             type="submit"
                                             disabled={!newMessage.trim() || sending}
-                                            className="w-12 h-12 shrink-0 rounded-full bg-[#ff6b35] text-white flex items-center justify-center hover:bg-[#e55a2b] transition-colors disabled:opacity-50"
+                                            className="w-12 h-12 shrink-0 rounded-full bg-[#ef4444] text-white flex items-center justify-center hover:bg-[#dc2626] transition-colors disabled:opacity-50"
                                         >
                                             <Send size={20} />
                                         </button>
@@ -316,7 +316,7 @@ function MessagesContent() {
                                 </form>
                             </>
                         ) : (
-                            <div className="flex-1 flex flex-col items-center justify-center text-[#2d1b4e]/40 bg-[#faf8f5]">
+                            <div className="flex-1 flex flex-col items-center justify-center text-[#2d1b4e]/40 bg-[#fffafa]">
                                 <User size={64} className="mb-4 opacity-50" />
                                 <p className="text-lg">Sélectionnez une conversation</p>
                             </div>
@@ -331,7 +331,7 @@ function MessagesContent() {
 export default function MessagesPage() {
     return (
         <Suspense fallback={
-            <div className="bg-[#faf8f5] min-h-screen flex items-center justify-center">
+            <div className="bg-[#fffafa] min-h-screen flex items-center justify-center">
                 <div className="text-[#2d1b4e]">Chargement...</div>
             </div>
         }>

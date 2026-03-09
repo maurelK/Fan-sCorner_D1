@@ -175,7 +175,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
       id: id,
       name: 'Maurel K',
       email: 'maurel@example.com',
-      bio: 'Humoriste et créateur de contenu exclusif sur FANBASE. Je partage du contenu humoristique chaque semaine!',
+      bio: "Humoriste et créateur de contenu exclusif sur Fan's Corner. Je partage du contenu humoristique chaque semaine!",
       category: 'humor',
       price_fcfa: 1000,
       subscribers: 1520,
@@ -659,12 +659,12 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
 
   const getCoverColor = (category: string | null) => {
     const colorMap: Record<string, string> = {
-      'humor': 'bg-gradient-to-br from-orange-400 to-pink-500',
+      'humor': 'bg-gradient-to-br from-red-400 to-pink-500',
       'tech': 'bg-gradient-to-br from-blue-400 to-purple-500',
       'music': 'bg-gradient-to-br from-purple-400 to-indigo-500',
       'education': 'bg-gradient-to-br from-green-400 to-teal-500',
     };
-    return colorMap[category?.toLowerCase() || ''] || 'bg-gradient-to-br from-orange-400 to-pink-500';
+    return colorMap[category?.toLowerCase() || ''] || 'bg-gradient-to-br from-red-400 to-pink-500';
   };
 
   const getInitials = (name: string) => {
@@ -754,9 +754,9 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
 
   if (loading && !creator) {
     return (
-      <div className="bg-[#faf8f5] min-h-screen py-12 flex items-center justify-center">
+      <div className="bg-[#fffafa] min-h-screen py-12 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ff6b35] mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ef4444] mx-auto mb-4"></div>
           <p className="text-[#2d1b4e]">Chargement du créateur...</p>
         </div>
       </div>
@@ -765,12 +765,12 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
 
   if (!creator) {
     return (
-      <div className="bg-[#faf8f5] min-h-screen py-12 flex items-center justify-center">
+      <div className="bg-[#fffafa] min-h-screen py-12 flex items-center justify-center">
         <div className="text-center">
           <p className="text-[#2d1b4e] text-lg mb-4">Créateur non trouvé</p>
           <button
             onClick={() => router.push('/explore')}
-            className="text-[#ff6b35] hover:text-[#e55a2b]"
+            className="text-[#ef4444] hover:text-[#dc2626]"
           >
             Retour à l'exploration
           </button>
@@ -780,7 +780,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
   }
 
   return (
-    <div className="bg-[#faf8f5] min-h-screen">
+    <div className="bg-[#fffafa] min-h-screen">
       {/* Header avec photo de profil */}
       <div className={`${!creator.cover_image_url ? getCoverColor(creator.category) : ''} h-64 relative bg-gray-200`}>
         {creator.cover_image_url ? (
@@ -825,12 +825,12 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
         )}
 
         {/* Informations du créateur */}
-        <div className="bg-white rounded-2xl p-8 shadow-lg border border-orange-100 mb-8 text-center">
+        <div className="bg-white rounded-2xl p-8 shadow-lg border border-red-100 mb-8 text-center">
           <h1 className="text-4xl font-bold text-[#2d1b4e] mb-4">{creator.name}</h1>
           <p className="text-lg text-[#2d1b4e]/80 mb-6">{creator.bio}</p>
 
           <div className="flex flex-wrap items-center justify-center gap-6 mb-6">
-            <div className="flex items-center gap-2 text-[#ff6b35]">
+            <div className="flex items-center gap-2 text-[#ef4444]">
               <Users size={24} />
               <span className="text-xl font-semibold">{creator.subscribers.toLocaleString()}</span>
               <span className="text-[#2d1b4e]/60">abonnés</span>
@@ -838,7 +838,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
             
             {creator.category && (
               <>
-                <div className="w-px h-8 bg-orange-200"></div>
+                <div className="w-px h-8 bg-red-200"></div>
                 <div className="text-[#2d1b4e]/60">
                   <span className="font-semibold">Catégorie:</span> {creator.category}
                 </div>
@@ -850,7 +850,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
           {!isSubscribed ? (
             <button
               onClick={handleSubscribeClick}
-              className="bg-[#ff6b35] text-white px-8 py-4 rounded-full hover:bg-[#e55a2b] transition-colors font-semibold text-lg flex items-center gap-3 mx-auto shadow-lg"
+              className="bg-[#ef4444] text-white px-8 py-4 rounded-full hover:bg-[#dc2626] transition-colors font-semibold text-lg flex items-center gap-3 mx-auto shadow-lg"
             >
               <Smartphone size={24} />
               S'abonner ({formatMoney(creator.price_fcfa)} FCFA/mois)
@@ -892,26 +892,26 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
           )}
 
           {posts.length === 0 ? (
-            <div className="bg-white rounded-2xl p-12 text-center border border-orange-100">
+            <div className="bg-white rounded-2xl p-12 text-center border border-red-100">
               <p className="text-[#2d1b4e]/60 text-lg">Aucun post pour le moment.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {posts.map((post) => (
-              <article key={post.id} className={`bg-white rounded-2xl overflow-hidden shadow-lg border border-orange-100 relative ${
+              <article key={post.id} className={`bg-white rounded-2xl overflow-hidden shadow-lg border border-red-100 relative ${
                 post.is_locked && !isSubscribed ? 'opacity-60' : ''
               }`}>
                 {post.is_locked && !isSubscribed && (
                   <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-10 flex items-center justify-center rounded-2xl">
                     <div className="text-center text-white p-6">
                       <div className="bg-white/90 rounded-full p-4 shadow-xl inline-block mb-4">
-                        <Lock className="text-[#ff6b35]" size={32} />
+                        <Lock className="text-[#ef4444]" size={32} />
                       </div>
                       <p className="font-semibold text-lg mb-2">Contenu verrouillé</p>
                       <p className="text-sm mb-4">Abonnez-vous pour débloquer ce contenu</p>
                       <button
                         onClick={handleSubscribeClick}
-                        className="bg-[#ff6b35] text-white px-4 py-2 rounded-lg hover:bg-[#e55a2b] transition-colors"
+                        className="bg-[#ef4444] text-white px-4 py-2 rounded-lg hover:bg-[#dc2626] transition-colors"
                       >
                         S'abonner pour débloquer
                       </button>
@@ -946,12 +946,12 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                   </div>
                   <p className="text-[#2d1b4e]/80 leading-relaxed whitespace-pre-wrap mb-4">{post.content}</p>
 
-                  <div className="flex items-center gap-4 border-t border-orange-100 pt-3 mb-3">
+                  <div className="flex items-center gap-4 border-t border-red-100 pt-3 mb-3">
                     <button
                       onClick={() => handleToggleLike(post.id)}
                       disabled={post.is_locked && !isSubscribed}
                       className={`inline-flex items-center gap-2 text-sm transition-colors ${
-                        likedPostIds.has(post.id) ? 'text-[#ff6b35]' : 'text-[#2d1b4e]/70 hover:text-[#ff6b35]'
+                        likedPostIds.has(post.id) ? 'text-[#ef4444]' : 'text-[#2d1b4e]/70 hover:text-[#ef4444]'
                       } disabled:opacity-50`}
                     >
                       <Heart size={16} fill={likedPostIds.has(post.id) ? 'currentColor' : 'none'} />
@@ -966,7 +966,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                     <div className="space-y-3">
                       <div className="space-y-2 max-h-36 overflow-y-auto pr-1">
                         {(commentsByPost[post.id] || []).slice(0, 5).map((comment) => (
-                          <div key={comment.id} className="bg-[#faf8f5] rounded-lg px-3 py-2">
+                          <div key={comment.id} className="bg-[#fffafa] rounded-lg px-3 py-2">
                             <p className="text-xs text-[#2d1b4e]/60 mb-1">
                               {comment.author_name} · {new Date(comment.created_at).toLocaleDateString('fr-FR')}
                             </p>
@@ -981,12 +981,12 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                           value={commentDraftByPost[post.id] || ''}
                           onChange={(e) => setCommentDraftByPost((prev) => ({ ...prev, [post.id]: e.target.value }))}
                           placeholder="Ajouter un commentaire..."
-                          className="flex-1 px-3 py-2 border border-orange-200 rounded-lg text-sm text-[#2d1b4e] focus:outline-none focus:ring-2 focus:ring-[#ff6b35]"
+                          className="flex-1 px-3 py-2 border border-red-200 rounded-lg text-sm text-[#2d1b4e] focus:outline-none focus:ring-2 focus:ring-[#ef4444]"
                         />
                         <button
                           onClick={() => handleAddComment(post.id)}
                           disabled={submittingByPost[post.id] || !(commentDraftByPost[post.id] || '').trim()}
-                          className="bg-[#ff6b35] text-white p-2 rounded-lg hover:bg-[#e55a2b] transition-colors disabled:opacity-50"
+                          className="bg-[#ef4444] text-white p-2 rounded-lg hover:bg-[#dc2626] transition-colors disabled:opacity-50"
                         >
                           <Send size={14} />
                         </button>
@@ -1016,18 +1016,18 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                   
                   {renderPaymentMessage()}
                   
-                  <div className="bg-gradient-to-r from-orange-50 to-pink-50 rounded-xl p-4 mb-6 border border-orange-200">
+                  <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-4 mb-6 border border-red-200">
                     <div className="text-center">
                       <p className="text-lg font-semibold text-[#2d1b4e] mb-2">
                         Montant de l'abonnement
                       </p>
-                      <p className="text-3xl font-bold text-[#ff6b35]">
+                      <p className="text-3xl font-bold text-[#ef4444]">
                         {formatMoney(creator.price_fcfa)} FCFA
                       </p>
                       <div className="flex items-center justify-center gap-4 mt-3 text-sm">
                         <div className="bg-white px-3 py-1 rounded-full border">
                           <span className="text-gray-600">Prochain abonné n°</span>
-                          <span className="font-bold text-[#ff6b35] ml-1">
+                          <span className="font-bold text-[#ef4444] ml-1">
                             {creator.subscribers + 1}
                           </span>
                         </div>
@@ -1109,10 +1109,10 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                           onChange={(e) => handleNameChange(e.target.value)}
                           onBlur={handleNameBlur}
                           placeholder="Ex: Jean Dupont"
-                          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff6b35] text-[#2d1b4e] ${
+                          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ef4444] text-[#2d1b4e] ${
                             nameError && nameTouched 
                               ? 'border-red-300 bg-red-50' 
-                              : 'border-orange-200'
+                              : 'border-red-200'
                           }`}
                         />
                         {nameError && nameTouched && (
@@ -1132,7 +1132,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                       {/* Email */}
                       <div>
                         <label className="block text-sm font-medium text-[#2d1b4e] mb-2">
-                          Votre email Fanbase *
+                          Votre email Fan's Corner *
                         </label>
                         <div className="relative">
                           <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
@@ -1146,10 +1146,10 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                             onChange={(e) => handleEmailChange(e.target.value)}
                             onBlur={handleEmailBlur}
                             placeholder="exemple@email.com"
-                            className={`w-full pl-10 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff6b35] text-[#2d1b4e] ${
+                            className={`w-full pl-10 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ef4444] text-[#2d1b4e] ${
                               emailError && emailTouched 
                                 ? 'border-red-300 bg-red-50' 
-                                : 'border-orange-200'
+                                : 'border-red-200'
                             }`}
                           />
                         </div>
@@ -1184,10 +1184,10 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                             onChange={(e) => handlePhoneChange(e.target.value)}
                             onBlur={handlePhoneBlur}
                             placeholder={`Ex: ${selectedProvider === 'mtn' ? '01 67 89 01 23' : '01 96 78 90 12'}`}
-                            className={`w-full pl-10 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff6b35] text-[#2d1b4e] ${
+                            className={`w-full pl-10 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ef4444] text-[#2d1b4e] ${
                               phoneError && phoneTouched 
                                 ? 'border-red-300 bg-red-50' 
-                                : 'border-orange-200'
+                                : 'border-red-200'
                             }`}
                             maxLength={12}
                           />
@@ -1240,7 +1240,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                     <div className="flex gap-3 mt-6">
                       <button
                         onClick={() => setShowPaymentModal(false)}
-                        className="flex-1 px-4 py-3 border border-orange-200 text-[#2d1b4e] rounded-lg hover:bg-orange-50 transition-colors text-sm"
+                        className="flex-1 px-4 py-3 border border-red-200 text-[#2d1b4e] rounded-lg hover:bg-red-50 transition-colors text-sm"
                         disabled={processingPayment}
                       >
                         Annuler
@@ -1248,7 +1248,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                       <button
                         onClick={sendPaymentRequestEmail}
                         disabled={processingPayment || !userName || !userEmail || !paymentPhone || !selectedProvider || !!phoneError || !!emailError || !!nameError}
-                        className="flex-1 bg-gradient-to-r from-[#ff6b35] to-orange-500 text-white px-4 py-3 rounded-lg hover:from-[#e55a2b] hover:to-orange-400 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg"
+                        className="flex-1 bg-gradient-to-r from-[#ef4444] to-red-500 text-white px-4 py-3 rounded-lg hover:from-[#dc2626] hover:to-red-400 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg"
                       >
                         {processingPayment ? (
                           <>
@@ -1283,7 +1283,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                       setShowInstructions(false);
                       setPendingSubscription(true);
                     }}
-                    className="w-full bg-[#ff6b35] text-white px-6 py-3 rounded-lg hover:bg-[#e55a2b] transition-colors"
+                    className="w-full bg-[#ef4444] text-white px-6 py-3 rounded-lg hover:bg-[#dc2626] transition-colors"
                   >
                     Retour au profil
                   </button>
@@ -1346,7 +1346,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                       setPaymentSuccess(false);
                       setPendingSubscription(true);
                     }}
-                    className="w-full bg-gradient-to-r from-[#ff6b35] to-orange-500 text-white px-6 py-3 rounded-lg hover:from-[#e55a2b] hover:to-orange-400 transition-colors font-medium shadow-lg"
+                    className="w-full bg-gradient-to-r from-[#ef4444] to-red-500 text-white px-6 py-3 rounded-lg hover:from-[#dc2626] hover:to-red-400 transition-colors font-medium shadow-lg"
                   >
                     Retour au profil
                   </button>
@@ -1462,12 +1462,12 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-300 rounded-xl p-4 mb-4">
+            <div className="bg-gradient-to-r from-red-50 to-red-50 border border-red-300 rounded-xl p-4 mb-4">
               <div className="flex items-start gap-3">
-                <AlertCircle className="text-orange-600 mt-1" size={24} />
+                <AlertCircle className="text-red-600 mt-1" size={24} />
                 <div>
-                  <h3 className="font-bold text-lg text-orange-900 mb-2">Informations importantes</h3>
-                  <ul className="space-y-2 text-sm text-orange-800">
+                  <h3 className="font-bold text-lg text-red-900 mb-2">Informations importantes</h3>
+                  <ul className="space-y-2 text-sm text-red-800">
                     <li className="flex items-start gap-2">
                       <ArrowRight size={16} className="flex-shrink-0 mt-0.5" />
                       <span>Utilisez <strong>{formatMoney(creator.price_fcfa)} FCFA</strong> comme montant exact</span>
@@ -1512,7 +1512,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                   setPaymentSuccess(false);
                   setShowInstructions(false);
                 }}
-                className="flex-1 px-4 py-3 border border-orange-300 text-[#2d1b4e] rounded-lg hover:bg-orange-50 transition-colors text-sm"
+                className="flex-1 px-4 py-3 border border-red-300 text-[#2d1b4e] rounded-lg hover:bg-red-50 transition-colors text-sm"
               >
                 Modifier les informations
               </button>
@@ -1522,7 +1522,7 @@ export default function CreatorProfilePage({ params }: { params: Promise<{ id: s
                   setShowPaymentModal(false);
                   setPendingSubscription(true);
                 }}
-                className="flex-1 bg-gradient-to-r from-[#ff6b35] to-orange-500 text-white px-4 py-3 rounded-lg hover:from-[#e55a2b] hover:to-orange-400 transition-all text-sm"
+                className="flex-1 bg-gradient-to-r from-[#ef4444] to-red-500 text-white px-4 py-3 rounded-lg hover:from-[#dc2626] hover:to-red-400 transition-all text-sm"
               >
                 J'ai compris
               </button>

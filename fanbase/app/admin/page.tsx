@@ -201,27 +201,27 @@ export default function AdminDashboard() {
     const getCohortCellClass = (value: number | null) => {
         if (value === null) return 'bg-gray-50 text-gray-300';
         if (value < 30) return 'bg-red-100 text-red-700';
-        if (value < 50) return 'bg-orange-100 text-orange-700';
+        if (value < 50) return 'bg-red-100 text-red-700';
         if (value < 70) return 'bg-yellow-100 text-yellow-700';
         return 'bg-green-100 text-green-700';
     };
 
     if (loading) {
         return (
-            <div className="bg-[#faf8f5] min-h-screen py-12 flex items-center justify-center">
+            <div className="bg-[#fffafa] min-h-screen py-12 flex items-center justify-center">
                 <div className="text-[#2d1b4e]">Chargement...</div>
             </div>
         );
     }
 
     return (
-        <div className="bg-[#faf8f5] min-h-screen py-12">
+        <div className="bg-[#fffafa] min-h-screen py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 className="text-4xl font-bold text-[#2d1b4e] mb-8">Admin Dashboard</h1>
 
                 {/* Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-white rounded-2xl p-6 shadow-lg border border-orange-100">
+                    <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100">
                         <div className="flex items-center gap-4 mb-2">
                             <div className="p-3 bg-blue-100 text-blue-600 rounded-full">
                                 <Users size={24} />
@@ -231,7 +231,7 @@ export default function AdminDashboard() {
                         <p className="text-3xl font-bold text-[#2d1b4e]">{stats.totalUsers}</p>
                     </div>
 
-                    <div className="bg-white rounded-2xl p-6 shadow-lg border border-orange-100">
+                    <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100">
                         <div className="flex items-center gap-4 mb-2">
                             <div className="p-3 bg-purple-100 text-purple-600 rounded-full">
                                 <TrendingUp size={24} />
@@ -241,7 +241,7 @@ export default function AdminDashboard() {
                         <p className="text-3xl font-bold text-[#2d1b4e]">{stats.totalCreators}</p>
                     </div>
 
-                    <div className="bg-white rounded-2xl p-6 shadow-lg border border-orange-100">
+                    <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100">
                         <div className="flex items-center gap-4 mb-2">
                             <div className="p-3 bg-green-100 text-green-600 rounded-full">
                                 <DollarSign size={24} />
@@ -253,20 +253,20 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Users Management */}
-                <div className="bg-white rounded-2xl shadow-lg border border-orange-100 overflow-hidden mb-8">
-                    <div className="p-6 border-b border-orange-100 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div className="bg-white rounded-2xl shadow-lg border border-red-100 overflow-hidden mb-8">
+                    <div className="p-6 border-b border-red-100 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <h2 className="text-2xl font-bold text-[#2d1b4e]">Gestion des Utilisateurs</h2>
                         <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto">
                             <input
                                 value={userSearch}
                                 onChange={(e) => setUserSearch(e.target.value)}
                                 placeholder="Rechercher nom ou email"
-                                className="px-4 py-2 border border-orange-200 rounded-lg text-sm"
+                                className="px-4 py-2 border border-red-200 rounded-lg text-sm"
                             />
                             <select
                                 value={userRoleFilter}
                                 onChange={(e) => setUserRoleFilter(e.target.value)}
-                                className="px-3 py-2 border border-orange-200 rounded-lg text-sm"
+                                className="px-3 py-2 border border-red-200 rounded-lg text-sm"
                             >
                                 <option value="all">Tous rôles</option>
                                 <option value="fan">Fans</option>
@@ -276,7 +276,7 @@ export default function AdminDashboard() {
                             <select
                                 value={userStatusFilter}
                                 onChange={(e) => setUserStatusFilter(e.target.value)}
-                                className="px-3 py-2 border border-orange-200 rounded-lg text-sm"
+                                className="px-3 py-2 border border-red-200 rounded-lg text-sm"
                             >
                                 <option value="all">Tous statuts</option>
                                 <option value="active">Actifs</option>
@@ -287,7 +287,7 @@ export default function AdminDashboard() {
 
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-[#faf8f5] text-[#2d1b4e]/60">
+                            <thead className="bg-[#fffafa] text-[#2d1b4e]/60">
                                 <tr>
                                     <th className="p-4 font-medium">Nom</th>
                                     <th className="p-4 font-medium">Email</th>
@@ -297,7 +297,7 @@ export default function AdminDashboard() {
                                     <th className="p-4 font-medium">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-orange-100">
+                            <tbody className="divide-y divide-red-100">
                                 {usersLoading ? (
                                     <tr>
                                         <td className="p-6 text-[#2d1b4e]/70" colSpan={6}>Chargement des utilisateurs...</td>
@@ -308,7 +308,7 @@ export default function AdminDashboard() {
                                     </tr>
                                 ) : (
                                     users.map((user) => (
-                                        <tr key={user.id} className="hover:bg-[#faf8f5]/50">
+                                        <tr key={user.id} className="hover:bg-[#fffafa]/50">
                                             <td className="p-4 font-medium text-[#2d1b4e]">{user.name}</td>
                                             <td className="p-4 text-[#2d1b4e]/80">{user.email}</td>
                                             <td className="p-4">
@@ -330,7 +330,7 @@ export default function AdminDashboard() {
                                                     <select
                                                         value={user.role}
                                                         onChange={(e) => handleUpdateUser(user.id, { role: e.target.value })}
-                                                        className="px-2 py-1 border border-orange-200 rounded-lg text-xs"
+                                                        className="px-2 py-1 border border-red-200 rounded-lg text-xs"
                                                     >
                                                         <option value="fan">fan</option>
                                                         <option value="creator">creator</option>
@@ -364,8 +364,8 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Weekly Analytics */}
-                <div className="bg-white rounded-2xl shadow-lg border border-orange-100 overflow-hidden mb-8">
-                    <div className="p-6 border-b border-orange-100 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div className="bg-white rounded-2xl shadow-lg border border-red-100 overflow-hidden mb-8">
+                    <div className="p-6 border-b border-red-100 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div className="flex items-center gap-3">
                             <BarChart3 className="text-[#2d1b4e]" size={22} />
                             <h2 className="text-2xl font-bold text-[#2d1b4e]">Analytics Fans Hebdo</h2>
@@ -375,7 +375,7 @@ export default function AdminDashboard() {
                             <select
                                 value={analyticsCreatorFilter}
                                 onChange={(e) => setAnalyticsCreatorFilter(e.target.value)}
-                                className="px-3 py-2 border border-orange-200 rounded-lg text-sm"
+                                className="px-3 py-2 border border-red-200 rounded-lg text-sm"
                             >
                                 <option value="all">Tous les créateurs</option>
                                 {creators.map((creator) => (
@@ -386,7 +386,7 @@ export default function AdminDashboard() {
                             <select
                                 value={analyticsWeeks}
                                 onChange={(e) => setAnalyticsWeeks(e.target.value)}
-                                className="px-3 py-2 border border-orange-200 rounded-lg text-sm"
+                                className="px-3 py-2 border border-red-200 rounded-lg text-sm"
                             >
                                 <option value="4">4 semaines</option>
                                 <option value="8">8 semaines</option>
@@ -396,16 +396,16 @@ export default function AdminDashboard() {
                         </div>
                     </div>
 
-                    <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-orange-100 bg-[#faf8f5]/40">
-                        <div className="bg-white rounded-xl p-4 border border-orange-100">
+                    <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-red-100 bg-[#fffafa]/40">
+                        <div className="bg-white rounded-xl p-4 border border-red-100">
                             <p className="text-sm text-[#2d1b4e]/70">Total fans ayant suivi (période)</p>
                             <p className="text-2xl font-bold text-[#2d1b4e]">{analyticsTotals.followedFans}</p>
                         </div>
-                        <div className="bg-white rounded-xl p-4 border border-orange-100">
+                        <div className="bg-white rounded-xl p-4 border border-red-100">
                             <p className="text-sm text-[#2d1b4e]/70">Total fans ayant regardé du contenu (vues)</p>
                             <p className="text-2xl font-bold text-[#2d1b4e]">{analyticsTotals.contentFans}</p>
                         </div>
-                        <div className="bg-white rounded-xl p-4 border border-orange-100">
+                        <div className="bg-white rounded-xl p-4 border border-red-100">
                             <p className="text-sm text-[#2d1b4e]/70">PMF hebdo (objectif {pmfOverview.targetRate}%)</p>
                             <p className="text-2xl font-bold text-[#2d1b4e]">{pmfOverview.latestRate}%</p>
                             <p className={`text-xs mt-1 font-medium ${pmfOverview.goalReached ? 'text-green-700' : 'text-red-700'}`}>
@@ -416,7 +416,7 @@ export default function AdminDashboard() {
 
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-[#faf8f5] text-[#2d1b4e]/60">
+                            <thead className="bg-[#fffafa] text-[#2d1b4e]/60">
                                 <tr>
                                     <th className="p-4 font-medium">Semaine (lundi)</th>
                                     <th className="p-4 font-medium">Fans qui ont suivi</th>
@@ -425,7 +425,7 @@ export default function AdminDashboard() {
                                     <th className="p-4 font-medium">Objectif 70%</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-orange-100">
+                            <tbody className="divide-y divide-red-100">
                                 {analyticsLoading ? (
                                     <tr>
                                         <td className="p-6 text-[#2d1b4e]/70" colSpan={5}>Chargement analytics...</td>
@@ -436,7 +436,7 @@ export default function AdminDashboard() {
                                     </tr>
                                 ) : (
                                     weeklyAnalytics.map((row) => (
-                                        <tr key={row.week} className="hover:bg-[#faf8f5]/50">
+                                        <tr key={row.week} className="hover:bg-[#fffafa]/50">
                                             <td className="p-4 text-[#2d1b4e] font-medium">{new Date(row.week).toLocaleDateString()}</td>
                                             <td className="p-4 text-[#2d1b4e]/90">{row.followedFans}</td>
                                             <td className="p-4 text-[#2d1b4e]/90">{row.contentFans}</td>
@@ -453,7 +453,7 @@ export default function AdminDashboard() {
                         </table>
                     </div>
 
-                    <div className="p-6 border-t border-orange-100 bg-[#faf8f5]/30">
+                    <div className="p-6 border-t border-red-100 bg-[#fffafa]/30">
                         <h3 className="text-lg font-semibold text-[#2d1b4e] mb-4">Chart PMF hebdo</h3>
 
                         {analyticsLoading ? (
@@ -485,7 +485,7 @@ export default function AdminDashboard() {
 
                                 return (
                                     <div className="overflow-x-auto">
-                                        <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="w-full min-w-[760px] h-[280px] bg-white border border-orange-100 rounded-xl">
+                                        <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="w-full min-w-[760px] h-[280px] bg-white border border-red-100 rounded-xl">
                                             <line x1={paddingLeft} y1={paddingTop} x2={paddingLeft} y2={paddingTop + innerHeight} stroke="#d1d5db" strokeWidth="1" />
                                             <line x1={paddingLeft} y1={paddingTop + innerHeight} x2={paddingLeft + innerWidth} y2={paddingTop + innerHeight} stroke="#d1d5db" strokeWidth="1" />
 
@@ -527,7 +527,7 @@ export default function AdminDashboard() {
                         )}
                     </div>
 
-                    <div className="p-6 border-t border-orange-100 bg-white">
+                    <div className="p-6 border-t border-red-100 bg-white">
                         <h3 className="text-lg font-semibold text-[#2d1b4e] mb-4">Tableau Cohortes PMF (Weekly)</h3>
 
                         {analyticsLoading ? (
@@ -569,13 +569,13 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Creators Management */}
-                <div className="bg-white rounded-2xl shadow-lg border border-orange-100 overflow-hidden">
-                    <div className="p-6 border-b border-orange-100">
+                <div className="bg-white rounded-2xl shadow-lg border border-red-100 overflow-hidden">
+                    <div className="p-6 border-b border-red-100">
                         <h2 className="text-2xl font-bold text-[#2d1b4e]">Gestion des Créateurs</h2>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-[#faf8f5] text-[#2d1b4e]/60">
+                            <thead className="bg-[#fffafa] text-[#2d1b4e]/60">
                                 <tr>
                                     <th className="p-6 font-medium">Nom</th>
                                     <th className="p-6 font-medium">Email</th>
@@ -584,9 +584,9 @@ export default function AdminDashboard() {
                                     <th className="p-6 font-medium">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-orange-100">
+                            <tbody className="divide-y divide-red-100">
                                 {creators.map((creator) => (
-                                    <tr key={creator.id} className="hover:bg-[#faf8f5]/50">
+                                    <tr key={creator.id} className="hover:bg-[#fffafa]/50">
                                         <td className="p-6 font-medium text-[#2d1b4e]">{creator.name}</td>
                                         <td className="p-6 text-[#2d1b4e]/80">{creator.email}</td>
                                         <td className="p-6 text-[#2d1b4e]/60">

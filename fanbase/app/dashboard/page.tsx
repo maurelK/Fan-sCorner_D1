@@ -377,14 +377,14 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="bg-[#faf8f5] min-h-screen py-12 flex items-center justify-center">
+      <div className="bg-[#fffafa] min-h-screen py-12 flex items-center justify-center">
         <div className="text-[#2d1b4e]">Chargement...</div>
       </div>
     );
   }
 
   return (
-    <div className="bg-[#faf8f5] min-h-screen py-12">
+    <div className="bg-[#fffafa] min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-[#2d1b4e]">
@@ -393,14 +393,14 @@ export default function DashboardPage() {
           <div className="flex gap-3">
             <button
               onClick={() => setShowProfileModal(true)}
-              className="bg-white text-[#2d1b4e] border border-orange-200 px-6 py-3 rounded-full hover:bg-orange-50 transition-colors font-semibold flex items-center gap-2"
+              className="bg-white text-[#2d1b4e] border border-red-200 px-6 py-3 rounded-full hover:bg-red-50 transition-colors font-semibold flex items-center gap-2"
             >
               <Settings size={20} />
               Modifier le profil
             </button>
             <button
               onClick={() => setShowPostForm(true)}
-              className="bg-[#ff6b35] text-white px-6 py-3 rounded-full hover:bg-[#e55a2b] transition-colors font-semibold flex items-center gap-2"
+              className="bg-[#ef4444] text-white px-6 py-3 rounded-full hover:bg-[#dc2626] transition-colors font-semibold flex items-center gap-2"
             >
               <Plus size={20} />
               Nouveau Post
@@ -410,10 +410,10 @@ export default function DashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-orange-100">
+          <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100">
             <div className="flex items-center justify-between mb-4">
-              <div className="bg-[#ff6b35]/10 p-3 rounded-full">
-                <DollarSign className="text-[#ff6b35]" size={24} />
+              <div className="bg-[#ef4444]/10 p-3 rounded-full">
+                <DollarSign className="text-[#ef4444]" size={24} />
               </div>
               <span className="text-sm text-[#2d1b4e]/60">Revenus totaux</span>
             </div>
@@ -425,10 +425,10 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-orange-100">
+          <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100">
             <div className="flex items-center justify-between mb-4">
-              <div className="bg-[#ff6b35]/10 p-3 rounded-full">
-                <Users className="text-[#ff6b35]" size={24} />
+              <div className="bg-[#ef4444]/10 p-3 rounded-full">
+                <Users className="text-[#ef4444]" size={24} />
               </div>
               <span className="text-sm text-[#2d1b4e]/60">Abonnés</span>
             </div>
@@ -440,10 +440,10 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-orange-100">
+          <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100">
             <div className="flex items-center justify-between mb-4">
-              <div className="bg-[#ff6b35]/10 p-3 rounded-full">
-                <Calendar className="text-[#ff6b35]" size={24} />
+              <div className="bg-[#ef4444]/10 p-3 rounded-full">
+                <Calendar className="text-[#ef4444]" size={24} />
               </div>
               <span className="text-sm text-[#2d1b4e]/60">Tarif mensuel</span>
             </div>
@@ -458,16 +458,16 @@ export default function DashboardPage() {
 
         {/* Liste des derniers abonnés */}
         {subscriptions.length > 0 && (
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-orange-100 mb-8">
+          <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100 mb-8">
             <h2 className="text-2xl font-bold text-[#2d1b4e] mb-6">Derniers abonnés</h2>
             <div className="space-y-4">
               {subscriptions.map((subscription) => (
                 <div
                   key={subscription.id}
-                  className="flex items-center justify-between p-4 bg-[#faf8f5] rounded-xl hover:bg-orange-50 transition-colors"
+                  className="flex items-center justify-between p-4 bg-[#fffafa] rounded-xl hover:bg-red-50 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] font-bold">
+                    <div className="w-12 h-12 rounded-full bg-[#ef4444]/20 flex items-center justify-center text-[#ef4444] font-bold">
                       {(subscription.users.full_name || subscription.users.email || 'U')[0].toUpperCase()}
                     </div>
                     <div>
@@ -480,7 +480,7 @@ export default function DashboardPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold text-[#ff6b35]">{stats.pricePerMonth} FCFA/mois</p>
+                    <p className="font-semibold text-[#ef4444]">{stats.pricePerMonth} FCFA/mois</p>
                   </div>
                 </div>
               ))}
@@ -488,13 +488,13 @@ export default function DashboardPage() {
           </div>
         )}
 
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-orange-100 mb-8">
+        <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100 mb-8">
           <h2 className="text-2xl font-bold text-[#2d1b4e] mb-6">Retours des fans</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-[#faf8f5] border border-orange-100 rounded-xl p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#ff6b35]/10 flex items-center justify-center">
-                <Heart className="text-[#ff6b35]" size={18} />
+            <div className="bg-[#fffafa] border border-red-100 rounded-xl p-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#ef4444]/10 flex items-center justify-center">
+                <Heart className="text-[#ef4444]" size={18} />
               </div>
               <div>
                 <p className="text-sm text-[#2d1b4e]/60">Likes reçus</p>
@@ -502,9 +502,9 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="bg-[#faf8f5] border border-orange-100 rounded-xl p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#ff6b35]/10 flex items-center justify-center">
-                <MessageCircle className="text-[#ff6b35]" size={18} />
+            <div className="bg-[#fffafa] border border-red-100 rounded-xl p-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#ef4444]/10 flex items-center justify-center">
+                <MessageCircle className="text-[#ef4444]" size={18} />
               </div>
               <div>
                 <p className="text-sm text-[#2d1b4e]/60">Commentaires reçus</p>
@@ -521,7 +521,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Liste des posts */}
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-orange-100">
+        <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100">
           <h2 className="text-2xl font-bold text-[#2d1b4e] mb-6">Mes Posts</h2>
           {posts.length === 0 ? (
             <div className="text-center py-12 text-[#2d1b4e]/60">
@@ -530,7 +530,7 @@ export default function DashboardPage() {
           ) : (
             <div className="space-y-6">
               {posts.map((post) => (
-                <div key={post.id} className="border border-orange-100 rounded-xl overflow-hidden">
+                <div key={post.id} className="border border-red-100 rounded-xl overflow-hidden">
                   {post.video_url ? (
                     <div className="relative w-full aspect-video bg-black">
                       <video
@@ -553,14 +553,14 @@ export default function DashboardPage() {
                     <h3 className="text-2xl font-bold text-[#2d1b4e] mb-2">{post.title}</h3>
                     <p className="text-[#2d1b4e]/80 mb-4 whitespace-pre-wrap">{post.content}</p>
 
-                    <div className="mb-4 border border-orange-100 rounded-xl bg-[#faf8f5] p-4">
+                    <div className="mb-4 border border-red-100 rounded-xl bg-[#fffafa] p-4">
                       <div className="flex items-center gap-6 text-sm mb-3">
                         <div className="flex items-center gap-2 text-[#2d1b4e]/80">
-                          <Heart size={16} className="text-[#ff6b35]" />
+                          <Heart size={16} className="text-[#ef4444]" />
                           <span>{likesByPost[post.id] || 0} j'aime</span>
                         </div>
                         <div className="flex items-center gap-2 text-[#2d1b4e]/80">
-                          <MessageCircle size={16} className="text-[#ff6b35]" />
+                          <MessageCircle size={16} className="text-[#ef4444]" />
                           <span>{feedbackComments.filter((c) => c.post_id === post.id).length} commentaires</span>
                         </div>
                       </div>
@@ -573,7 +573,7 @@ export default function DashboardPage() {
                             .filter((c) => c.post_id === post.id)
                             .slice(0, 5)
                             .map((comment) => (
-                              <div key={comment.id} className="bg-white border border-orange-100 rounded-lg px-3 py-2">
+                              <div key={comment.id} className="bg-white border border-red-100 rounded-lg px-3 py-2">
                                 <div className="flex items-center justify-between mb-1">
                                   <p className="font-semibold text-[#2d1b4e] text-sm">{comment.author_name}</p>
                                   <p className="text-xs text-[#2d1b4e]/50">
@@ -617,7 +617,7 @@ export default function DashboardPage() {
       {showPostForm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-orange-100 px-6 py-4 flex justify-between items-center">
+            <div className="sticky top-0 bg-white border-b border-red-100 px-6 py-4 flex justify-between items-center">
               <h2 className="text-2xl font-bold text-[#2d1b4e]">Nouveau Post</h2>
               <button
                 onClick={() => {
@@ -645,7 +645,7 @@ export default function DashboardPage() {
                   required
                   value={postTitle}
                   onChange={(e) => setPostTitle(e.target.value)}
-                  className="w-full px-4 py-3 border border-orange-200 rounded-lg focus:ring-2 focus:ring-[#ff6b35] focus:border-transparent text-[#2d1b4e]"
+                  className="w-full px-4 py-3 border border-red-200 rounded-lg focus:ring-2 focus:ring-[#ef4444] focus:border-transparent text-[#2d1b4e]"
                   placeholder="Titre de votre post"
                 />
               </div>
@@ -660,7 +660,7 @@ export default function DashboardPage() {
                   value={postContent}
                   onChange={(e) => setPostContent(e.target.value)}
                   rows={6}
-                  className="w-full px-4 py-3 border border-orange-200 rounded-lg focus:ring-2 focus:ring-[#ff6b35] focus:border-transparent text-[#2d1b4e]"
+                  className="w-full px-4 py-3 border border-red-200 rounded-lg focus:ring-2 focus:ring-[#ef4444] focus:border-transparent text-[#2d1b4e]"
                   placeholder="Contenu de votre post"
                 />
               </div>
@@ -679,13 +679,13 @@ export default function DashboardPage() {
                   />
                   <label
                     htmlFor="media"
-                    className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-orange-200 rounded-lg cursor-pointer hover:border-[#ff6b35] transition-colors text-[#2d1b4e]"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-red-200 rounded-lg cursor-pointer hover:border-[#ef4444] transition-colors text-[#2d1b4e]"
                   >
                     <Upload size={20} />
                     {mediaFile ? 'Changer le fichier' : 'Choisir une photo ou vidéo'}
                   </label>
                   {mediaPreview && (
-                    <div className="relative w-full rounded-lg overflow-hidden border border-orange-200">
+                    <div className="relative w-full rounded-lg overflow-hidden border border-red-200">
                       {mediaType === 'video' ? (
                         <video src={mediaPreview} controls className="w-full max-h-64 object-contain bg-black" />
                       ) : (
@@ -714,14 +714,14 @@ export default function DashboardPage() {
                     setMediaPreview(null);
                     setMediaType(null);
                   }}
-                  className="flex-1 px-6 py-3 border border-orange-200 text-[#2d1b4e] rounded-lg hover:bg-orange-50 transition-colors font-medium"
+                  className="flex-1 px-6 py-3 border border-red-200 text-[#2d1b4e] rounded-lg hover:bg-red-50 transition-colors font-medium"
                 >
                   Annuler
                 </button>
                 <button
                   type="submit"
                   disabled={uploading || !postTitle || !postContent}
-                  className="flex-1 bg-[#ff6b35] text-white px-6 py-3 rounded-lg hover:bg-[#e55a2b] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 bg-[#ef4444] text-white px-6 py-3 rounded-lg hover:bg-[#dc2626] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {uploading ? 'Publication...' : 'Publier'}
                 </button>
@@ -735,7 +735,7 @@ export default function DashboardPage() {
       {showProfileModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-orange-100 px-6 py-4 flex justify-between items-center z-10">
+            <div className="sticky top-0 bg-white border-b border-red-100 px-6 py-4 flex justify-between items-center z-10">
               <h2 className="text-2xl font-bold text-[#2d1b4e]">Modifier mon profil</h2>
               <button onClick={() => setShowProfileModal(false)}><X size={24} /></button>
             </div>
@@ -744,7 +744,7 @@ export default function DashboardPage() {
               {/* Cover Image */}
               <div>
                 <label className="block text-sm font-medium text-[#2d1b4e] mb-2">Photo de couverture</label>
-                <div className="relative h-48 rounded-xl bg-gray-100 overflow-hidden border border-orange-200 group">
+                <div className="relative h-48 rounded-xl bg-gray-100 overflow-hidden border border-red-200 group">
                   {coverPreview ? (
                     <Image src={coverPreview} alt="Cover" fill className="object-cover" />
                   ) : (
@@ -787,7 +787,7 @@ export default function DashboardPage() {
                   <select
                     value={profile.category}
                     onChange={(e) => setProfile({ ...profile, category: e.target.value })}
-                    className="w-full px-4 py-3 border border-orange-200 rounded-lg bg-white"
+                    className="w-full px-4 py-3 border border-red-200 rounded-lg bg-white"
                   >
                     <option value="">Selectionner une categorie</option>
                     {CATEGORY_OPTIONS.map((category) => (
@@ -803,7 +803,7 @@ export default function DashboardPage() {
                     type="number"
                     value={profile.price_fcfa}
                     onChange={(e) => setProfile({ ...profile, price_fcfa: parseInt(e.target.value) })}
-                    className="w-full px-4 py-3 border border-orange-200 rounded-lg"
+                    className="w-full px-4 py-3 border border-red-200 rounded-lg"
                   />
                 </div>
               </div>
@@ -814,7 +814,7 @@ export default function DashboardPage() {
                   rows={4}
                   value={profile.bio}
                   onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-                  className="w-full px-4 py-3 border border-orange-200 rounded-lg"
+                  className="w-full px-4 py-3 border border-red-200 rounded-lg"
                 />
               </div>
 
@@ -822,14 +822,14 @@ export default function DashboardPage() {
                 <button
                   type="button"
                   onClick={() => setShowProfileModal(false)}
-                  className="px-6 py-3 border border-orange-200 rounded-lg hover:bg-orange-50"
+                  className="px-6 py-3 border border-red-200 rounded-lg hover:bg-red-50"
                 >
                   Annuler
                 </button>
                 <button
                   type="submit"
                   disabled={savingProfile}
-                  className="bg-[#ff6b35] text-white px-6 py-3 rounded-lg hover:bg-[#e55a2b]"
+                  className="bg-[#ef4444] text-white px-6 py-3 rounded-lg hover:bg-[#dc2626]"
                 >
                   {savingProfile ? 'Enregistrement...' : 'Enregistrer'}
                 </button>

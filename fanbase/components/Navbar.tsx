@@ -81,27 +81,30 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow-sm border-b border-orange-100">
+    <nav className="bg-white shadow-sm border-b border-red-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center">
-            <span className="text-2xl font-bold text-[#ff6b35]">FANBASE</span>
+            <span className="text-2xl font-bold text-[#ef4444]">Fan's Corner</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="/explore" className="text-[#2d1b4e] hover:text-[#ff6b35] transition-colors">
+            <Link href="/explore" className="text-[#2d1b4e] hover:text-[#ef4444] transition-colors">
               Explorer
+            </Link>
+            <Link href="/faq" className="text-[#2d1b4e] hover:text-[#ef4444] transition-colors">
+              FAQ
             </Link>
             {user ? (
               <>
-                <Link href={user.role === 'fan' ? '/fan/dashboard' : '/dashboard'} className="text-[#2d1b4e] hover:text-[#ff6b35] transition-colors">
+                <Link href={user.role === 'fan' ? '/fan/dashboard' : '/dashboard'} className="text-[#2d1b4e] hover:text-[#ef4444] transition-colors">
                   {user.role === 'fan' ? 'Mon Espace' : 'Dashboard'}
                 </Link>
-                <Link href="/messages" className="text-[#2d1b4e] hover:text-[#ff6b35] transition-colors relative">
+                <Link href="/messages" className="text-[#2d1b4e] hover:text-[#ef4444] transition-colors relative">
                   Messagerie
                   {unreadCount > 0 && (
-                    <span className="absolute -top-2 -right-3 bg-[#ff6b35] text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                    <span className="absolute -top-2 -right-3 bg-[#ef4444] text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
                       {unreadCount}
                     </span>
                   )}
@@ -113,7 +116,7 @@ export default function Navbar() {
                   </div>
                   <button
                     onClick={handleSignOut}
-                    className="text-[#2d1b4e] hover:text-[#ff6b35] transition-colors flex items-center gap-2"
+                    className="text-[#2d1b4e] hover:text-[#ef4444] transition-colors flex items-center gap-2"
                   >
                     <LogOut size={18} />
                     Déconnexion
@@ -122,12 +125,12 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/login" className="text-[#2d1b4e] hover:text-[#ff6b35] transition-colors">
+                <Link href="/login" className="text-[#2d1b4e] hover:text-[#ef4444] transition-colors">
                   Connexion
                 </Link>
                 <Link
                   href="/login"
-                  className="bg-[#ff6b35] text-white px-6 py-2 rounded-full hover:bg-[#e55a2b] transition-colors font-medium"
+                  className="bg-[#ef4444] text-white px-6 py-2 rounded-full hover:bg-[#dc2626] transition-colors font-medium"
                 >
                   Commencer
                 </Link>
@@ -147,18 +150,21 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4 space-y-4">
-            <Link href="/explore" className="block text-[#2d1b4e] hover:text-[#ff6b35] transition-colors">
+            <Link href="/explore" className="block text-[#2d1b4e] hover:text-[#ef4444] transition-colors">
               Explorer
+            </Link>
+            <Link href="/faq" className="block text-[#2d1b4e] hover:text-[#ef4444] transition-colors">
+              FAQ
             </Link>
             {user ? (
               <>
-                <Link href={user.role === 'fan' ? '/fan/dashboard' : '/dashboard'} className="block text-[#2d1b4e] hover:text-[#ff6b35] transition-colors">
+                <Link href={user.role === 'fan' ? '/fan/dashboard' : '/dashboard'} className="block text-[#2d1b4e] hover:text-[#ef4444] transition-colors">
                   {user.role === 'fan' ? 'Mon Espace' : 'Dashboard'}
                 </Link>
-                <Link href="/messages" className="block text-[#2d1b4e] hover:text-[#ff6b35] transition-colors relative">
+                <Link href="/messages" className="block text-[#2d1b4e] hover:text-[#ef4444] transition-colors relative">
                   Messagerie
                   {unreadCount > 0 && (
-                    <span className="ml-2 inline-flex bg-[#ff6b35] text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                    <span className="ml-2 inline-flex bg-[#ef4444] text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">
                       {unreadCount}
                     </span>
                   )}
@@ -169,7 +175,7 @@ export default function Navbar() {
                 </div>
                 <button
                   onClick={handleSignOut}
-                  className="block w-full text-left text-[#2d1b4e] hover:text-[#ff6b35] transition-colors flex items-center gap-2"
+                  className="block w-full text-left text-[#2d1b4e] hover:text-[#ef4444] transition-colors flex items-center gap-2"
                 >
                   <LogOut size={18} />
                   Déconnexion
@@ -177,12 +183,12 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/login" className="block text-[#2d1b4e] hover:text-[#ff6b35] transition-colors">
+                <Link href="/login" className="block text-[#2d1b4e] hover:text-[#ef4444] transition-colors">
                   Connexion
                 </Link>
                 <Link
                   href="/login"
-                  className="block w-full bg-[#ff6b35] text-white px-6 py-2 rounded-full hover:bg-[#e55a2b] transition-colors font-medium text-center"
+                  className="block w-full bg-[#ef4444] text-white px-6 py-2 rounded-full hover:bg-[#dc2626] transition-colors font-medium text-center"
                 >
                   Commencer
                 </Link>
