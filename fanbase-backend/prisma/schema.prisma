@@ -1,0 +1,168 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @db.Uuid
+  email     String   @unique
+  fullName  String?  @map("full_name")
+  role      UserRole @default(FAN)
+  status    String   @default("active")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relations
+  creatorProfile       CreatorProfile?
+  createdPosts         Post[]              @relation("CreatorPosts")
+  subscriptionsAsFan   Subscription[]      @relation("FanSubscriptions")
+  subscriptionsAsCreator Subscription[]    @relation("CreatorSubscriptions")
+  paymentRequests      PaymentRequest[]    @relation("CreatorPaymentRequests")
+  fanPaymentRequests   PaymentRequest[]    @relation("FanPaymentRequests")
+  payments             Payment[]
+  sentMessages         Message[]           @relation("SentMessages")
+  receivedMessages     Message[]           @relation("ReceivedMessages")
+
+  @@map("users")
+}
+
+enum UserRole {
+  FAN      @map("fan")
+  CREATOR  @map("creator")
+  ADMIN    @map("admin")
+
+  @@map("_user_role")
+}
+
+model CreatorProfile {
+  id              String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId          String   @unique @map("user_id") @db.Uuid
+  bio             String?
+  priceFcfa       Int      @default(500) @map("price_fcfa")
+  category        String?
+  profileImageUrl String?  @map("profile_image_url")
+  coverImageUrl   String?  @map("cover_image_url")
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("creators_profile")
+}
+
+model Subscription {
+  id        String             @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  fanId     String             @map("fan_id") @db.Uuid
+  creatorId String             @map("creator_id") @db.Uuid
+  status    SubscriptionStatus @default(ACTIVE)
+  createdAt DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime           @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relations
+  fan     User @relation("FanSubscriptions", fields: [fanId], references: [id], onDelete: Cascade)
+  creator User @relation("CreatorSubscriptions", fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@unique([fanId, creatorId])
+  @@map("subscriptions")
+}
+
+enum SubscriptionStatus {
+  ACTIVE    @map("active")
+  CANCELLED @map("cancelled")
+  EXPIRED   @map("expired")
+
+  @@map("_subscription_status")
+}
+
+model PaymentRequest {
+  id              String               @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  creatorId       String               @map("creator_id") @db.Uuid
+  fanId           String               @map("fan_id") @db.Uuid
+  userName        String               @map("user_name")
+  userEmail       String               @map("user_email")
+  userPhone       String               @map("user_phone")
+  amount          Int
+  paymentProvider String               @map("payment_provider")
+  status          PaymentRequestStatus @default(PENDING)
+  transactionId   String?              @map("transaction_id")
+  notes           String?
+  createdAt       DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime             @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relations
+  creator User @relation("CreatorPaymentRequests", fields: [creatorId], references: [id], onDelete: Cascade)
+  fan     User @relation("FanPaymentRequests", fields: [fanId], references: [id], onDelete: Cascade)
+
+  @@map("payment_requests")
+}
+
+enum PaymentRequestStatus {
+  PENDING   @map("pending")
+  COMPLETED @map("completed")
+  CANCELLED @map("cancelled")
+
+  @@map("_payment_request_status")
+}
+
+model Payment {
+  id        String        @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId    String        @map("user_id") @db.Uuid
+  amount    Int
+  provider  String
+  status    PaymentStatus @default(PENDING)
+  metadata  Json          @default("{}") @db.JsonB
+  createdAt DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime      @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
+
+enum PaymentStatus {
+  PENDING   @map("pending")
+  COMPLETED @map("completed")
+  FAILED    @map("failed")
+
+  @@map("_payment_status")
+}
+
+model Post {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  creatorId String   @map("creator_id") @db.Uuid
+  title     String
+  content   String
+  imageUrl  String?  @map("image_url")
+  videoUrl  String?  @map("video_url")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relations
+  creator User @relation("CreatorPosts", fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@map("posts")
+}
+
+model Message {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  senderId   String   @map("sender_id") @db.Uuid
+  receiverId String   @map("receiver_id") @db.Uuid
+  content    String
+  isRead     Boolean  @default(false) @map("is_read")
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  // Relations
+  sender   User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}

@@ -1,0 +1,209 @@
+import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import { PrismaService } from '@/prisma/prisma.service';
+import { CreatePostDto, UpdatePostDto } from './dto';
+
+@Injectable()
+export class PostsService {
+  constructor(private prisma: PrismaService) {}
+
+  async create(userId: string, createPostDto: CreatePostDto) {
+    // Verify user is a creator
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user || user.role !== 'CREATOR') {
+      throw new ForbiddenException('Only creators can create posts');
+    }
+
+    const post = await this.prisma.post.create({
+      data: {
+        creatorId: userId,
+        title: createPostDto.title,
+        content: createPostDto.content,
+        imageUrl: createPostDto.imageUrl,
+        videoUrl: createPostDto.videoUrl,
+      },
+      include: {
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            creatorProfile: true,
+          },
+        },
+      },
+    });
+
+    return post;
+  }
+
+  async findAll() {
+    return this.prisma.post.findMany({
+      include: {
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            creatorProfile: {
+              select: {
+                bio: true,
+                profileImageUrl: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
+  async findByCreator(creatorId: string) {
+    return this.prisma.post.findMany({
+      where: { creatorId },
+      include: {
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            creatorProfile: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
+  async findOne(id: string) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+      include: {
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            creatorProfile: true,
+          },
+        },
+      },
+    });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    return post;
+  }
+
+  async update(id: string, userId: string, updatePostDto: UpdatePostDto) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+    });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    if (post.creatorId !== userId) {
+      throw new ForbiddenException('You can only update your own posts');
+    }
+
+    return this.prisma.post.update({
+      where: { id },
+      data: updatePostDto,
+      include: {
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            creatorProfile: true,
+          },
+        },
+      },
+    });
+  }
+
+  async remove(id: string, userId: string) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+    });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    if (post.creatorId !== userId) {
+      throw new ForbiddenException('You can only delete your own posts');
+    }
+
+    await this.prisma.post.delete({
+      where: { id },
+    });
+
+    return { message: 'Post deleted successfully' };
+  }
+
+  async getCreatorPosts(userId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user || user.role !== 'CREATOR') {
+      throw new ForbiddenException('User is not a creator');
+    }
+
+    return this.findByCreator(userId);
+  }
+
+  async getSubscribedPosts(userId: string) {
+    // Get all creators the user is subscribed to
+    const subscriptions = await this.prisma.subscription.findMany({
+      where: {
+        fanId: userId,
+        status: 'ACTIVE',
+      },
+      select: {
+        creatorId: true,
+      },
+    });
+
+    const creatorIds = subscriptions.map((sub) => sub.creatorId);
+
+    // Get posts from subscribed creators
+    return this.prisma.post.findMany({
+      where: {
+        creatorId: {
+          in: creatorIds,
+        },
+      },
+      include: {
+        creator: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            creatorProfile: {
+              select: {
+                bio: true,
+                profileImageUrl: true,
+                category: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+}
